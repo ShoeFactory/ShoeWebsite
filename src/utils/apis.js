@@ -5,15 +5,18 @@ import {post} from './request'
  * 所有的后端接口地址
  */
 const URLS = {
-    common_prefix: "http://www.shakeda.com:5555/api/v1.0/",
-    // common_prefix: "http://192.168.1.114:5000/api/v1.0/",
+    //common_prefix: "http://www.shakeda.com:5555/api/v1.0/",
+    common_prefix: "http://192.168.1.114:5555/api/v1.0/",
 
     account_login: "account/login",
     account_register_qrcode: "account/register/qrcode",
     account_register: "account/register",
     account_password_qrcode: "account/password/qrcode",
     account_password: "account/password/retrieve",
-    account_profile:"account/profile",
+    account_profile: "account/profile",
+    account_devices: "account/devices",
+    account_device_add: "account/devices/add",
+    account_device_remove: "account/devices/remove"
 }
 
 /**
@@ -79,16 +82,16 @@ class APIS_CLASS {
 
     /**
      * 修改密码
-     * @param {*} telephone 
-     * @param {*} qrcode 
-     * @param {*} password 
+     * @param {*} telephone
+     * @param {*} qrcode
+     * @param {*} password
      */
     password(telephone, password, qrcode) {
         let url = URLS.common_prefix + URLS.account_password;
         let body = {
             telephone: telephone,
             newpassword: password,
-            qrcode: qrcode,
+            qrcode: qrcode
         }
         return post(url, body);
     }
@@ -96,9 +99,44 @@ class APIS_CLASS {
     /**
      * 获取用户资料
      */
-    profile(){
+    profile() {
         let url = URLS.common_prefix + URLS.account_profile;
+        let body = {}
+        return post(url, body);
+    }
+
+    /**
+     * 查询设备
+     */
+    devices() {
+        let url = URLS.common_prefix + URLS.account_devices;
         let body = {
+        }
+        return post(url, body);
+    }
+
+    /**
+     * 添加设备
+     * @param {*} name
+     * @param {*} imei
+     */
+    addDevice(name, imei) {
+        let url = URLS.common_prefix + URLS.account_device_add;
+        let body = {
+            name: name,
+            sid: imei
+        }
+        return post(url, body);
+    }
+
+    /**
+     * 删除设备
+     * @param {*} imei
+     */
+    removeDevice(imei) {
+        let url = URLS.common_prefix + URLS.account_device_remove;
+        let body = {
+            sid: imei
         }
         return post(url, body);
     }

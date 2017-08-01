@@ -8,6 +8,12 @@ import UserProfileComponent from '../components/ManageUserProfile'
 
 import RouteMap from '../utils/router'
 
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+
+import {setManageCurrentIndex} from '../redux/actions/ui'
+
+
 import "./ManagePage.css"
 
 // 设备列表 添加设备 左右布局
@@ -16,11 +22,11 @@ const SubMenu = Menu.SubMenu;
 class ManagePage extends React.Component {
   state = {
     theme: 'light',
-    current: '1'
+    current: '1',
   }
   handleClick = (e) => {
     console.log('click ', e);
-    this.setState({current: e.key});
+    this.props.setManageCurrentIndex(e.key)
 
     console.log(e.item.props.path);
     this
@@ -37,7 +43,8 @@ class ManagePage extends React.Component {
                 onClick={this.handleClick}
 
                 defaultOpenKeys={['devices']}
-                selectedKeys={[this.state.current]}
+                selectedKeys={[this.props.manageCurrentIndex]}
+
                 mode="inline">
                 <SubMenu
                   key="devices"
@@ -62,4 +69,18 @@ class ManagePage extends React.Component {
   }
 }
 
-export default ManagePage;
+
+function mapStateToProps(state) {
+  return {
+    manageCurrentIndex: state.uiReducer.manageCurrentIndex,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+        setManageCurrentIndex: bindActionCreators(setManageCurrentIndex, dispatch)
+  }
+}
+
+const ConnectedManagePage = connect(mapStateToProps, mapDispatchToProps)(ManagePage);
+export default ConnectedManagePage;

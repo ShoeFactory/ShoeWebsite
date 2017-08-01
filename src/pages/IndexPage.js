@@ -10,6 +10,8 @@ import {Navbar, Nav, NavItem} from 'react-bootstrap';
 
 import {Route, NavLink} from 'react-router-dom'
 
+import {connect} from 'react-redux'
+
 import HomePage from '../components/HomePage'
 import LogInOutButton from '../components/LogInOutButton'
 
@@ -37,7 +39,14 @@ class IndexPage extends React.Component {
     {
         if(e.key === "login")
             return;
-        this.props.history.push(e.path);
+        else if(e.key === "manage" || e.key === "position")
+            {
+                //判断是否登录
+                if(this.props.token != null)
+                    this.props.history.push(e.path);
+                else
+                    this.props.history.push(RouteMap.userAccountLogin);
+            }
     }
 
     handleLoginClick(e) {
@@ -62,7 +71,7 @@ class IndexPage extends React.Component {
                             <NavItem eventKey={{key:"position",path: RouteMap.positionPage}} href={RouteMap.positionPage}>
                             定位
                             </NavItem>
-                            <NavItem eventKey={{key:"device", path:RouteMap.managePage}} href={RouteMap.managePage}>
+                            <NavItem eventKey={{key:"manage", path:RouteMap.managePage}} href={RouteMap.managePage}>
                             管理
                             </NavItem>
                             <NavItem onClick={this.handleLoginClick} eventKey={{key:"login", path: RouteMap.userAccountLogin}} href={RouteMap.userAccountLogin}>
@@ -86,4 +95,17 @@ class IndexPage extends React.Component {
     }
 }
 
-export default IndexPage;
+function mapStateToProps(state) {
+  return {
+    token: state.userReducer.token,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+  }
+}
+
+const ConnectedIndexPage = connect(mapStateToProps, mapDispatchToProps)(IndexPage);
+export default ConnectedIndexPage;
+

@@ -28,6 +28,9 @@ export default {
       phone: null,
       name: null,
     },
+  },
+
+  uiReducer:{
+    manageCurrentIndex: '1',
   }
-  
 }
