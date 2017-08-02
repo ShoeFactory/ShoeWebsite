@@ -7,3 +7,7 @@
 .slider{
     background: #fff;
 }
+
+div.ant-layout-sider-children{
+    height: 100%;
+}

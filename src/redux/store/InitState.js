@@ -32,5 +32,22 @@ export default {
 
   uiReducer:{
     manageCurrentIndex: '1',
+  },
+
+  /** 
+   * 关心每个设备的情况 与服务器不断的做同步 没有超过服务器提供的额外
+   */
+  positionReducer:{
+    deviceList: []
+    /** 
+     * 每个device的状态包括
+     * name          名称
+     * IMEI          设备号
+     * electriccity  剩余电量
+     * status        是否在线
+     * 
+     * monitor       是否监测
+     * 
+     */
   }
 }
