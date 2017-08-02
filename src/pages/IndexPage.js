@@ -11,6 +11,9 @@ import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import {Route, NavLink} from 'react-router-dom'
 
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {setManageCurrentIndex} from '../redux/actions/ui'
+
 
 import HomePage from '../components/HomePage'
 import LogInOutButton from '../components/LogInOutButton'
@@ -43,7 +46,16 @@ class IndexPage extends React.Component {
             {
                 //判断是否登录
                 if(this.props.token != null)
-                    this.props.history.push(e.path);
+                {
+                    if(e.key === "position")
+                        this.props.history.push(e.path)
+                    if(e.key === "manage")
+                    {
+                        this.props.history.push(RouteMap.deviceList);
+                        this.props.setManageCurrentIndex("1")
+                    }   
+                }
+                
                 else
                     this.props.history.push(RouteMap.userAccountLogin);
             }
@@ -83,6 +95,7 @@ class IndexPage extends React.Component {
                 </Navbar>
                 <div style={{
                     flex: "1",
+                    height: "10%"
                 }}>
                     <Route path={RouteMap.homePage} component={HomePage}/>
                     <Route path={RouteMap.managePage} component={ManagePage}/>
@@ -103,6 +116,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    setManageCurrentIndex: bindActionCreators(setManageCurrentIndex, dispatch)
   }
 }
 

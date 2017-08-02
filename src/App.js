@@ -62,7 +62,6 @@ class App extends React.Component {
                height:"100%",
                 }}>
             <Route exact path={RouteMap.index} render={() => <Redirect to={RouteMap.homePage}/>}/>
-            <Route exact path={RouteMap.managePage} render={() => <Redirect to={RouteMap.deviceList}/>}/>
 
             <Route path={RouteMap.index} component={IndexPage}/>
           </div>
