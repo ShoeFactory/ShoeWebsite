@@ -6,22 +6,11 @@ class DeviceListComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookList: [
-                {
-                    "name": "前端从入门到精通1",
-                    "imei": "132456789"
-                }, {
-                    "name": "Java从入门到放弃",
-                    "imei": "987654321"
-                }
-            ],
             deviceList: []
         };
     }
 
     componentWillMount() {
-        console.log("will mount");
-
             // 查询设备
             APIS.devices()
                 .then((res) => {

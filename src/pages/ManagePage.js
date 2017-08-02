@@ -6,6 +6,9 @@ import DeviceAddComponent from '../components/ManageDeviceAdd'
 import DeviceListComponent from '../components/ManageDeviceList'
 import UserProfileComponent from '../components/ManageUserProfile'
 
+import UpdatePasswordComponent from '../components/ManageUpdatePassword'
+
+
 import RouteMap from '../utils/router'
 
 import {bindActionCreators} from 'redux'
@@ -48,11 +51,16 @@ class ManagePage extends React.Component {
                 mode="inline">
                 <SubMenu
                   key="devices"
-                  title={< span > <Icon type="mail"/> < span > 设备管理 </span></span >}>
+                  title={< span > <Icon type="api"/> < span > 设备管理 </span></span >}>
                   <Menu.Item key="1" path={RouteMap.deviceList}>设备列表</Menu.Item>
                   <Menu.Item key="2" path={RouteMap.deviceAdd}>添加设备</Menu.Item>
                 </SubMenu>
-                <Menu.Item key="3"path={RouteMap.userProfile}><span> <Icon type="mail"/> </span>个人资料</Menu.Item>
+                <SubMenu
+                  key="account"
+                  title={< span > <Icon type="user"/> < span > 账号管理 </span></span >}>
+                  <Menu.Item key="3" path={RouteMap.userProfile}>个人资料</Menu.Item>
+                  <Menu.Item key="4" path={RouteMap.updatePassword}>重置密码</Menu.Item>
+                </SubMenu>
               </Menu>
             </Layout.Sider>
 
@@ -61,7 +69,7 @@ class ManagePage extends React.Component {
                 <Route path={RouteMap.deviceList} component={DeviceListComponent}/>
                 <Route path={RouteMap.deviceAdd}  component={DeviceAddComponent}/>
                 <Route path={RouteMap.userProfile}  component={UserProfileComponent}/>
-
+                <Route path={RouteMap.updatePassword}  component={UpdatePasswordComponent}/>
               </div>
             </Layout.Content>
           </Layout>

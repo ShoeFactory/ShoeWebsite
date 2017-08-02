@@ -13,7 +13,9 @@ const URLS = {
     account_register: "account/register",
     account_password_qrcode: "account/password/qrcode",
     account_password: "account/password/retrieve",
+    account_password_update: "account/password/update",
     account_profile: "account/profile",
+    account_profile_update: "account/profile/update",
     account_devices: "account/devices",
     account_device_add: "account/devices/add",
     account_device_remove: "account/devices/remove"
@@ -81,7 +83,7 @@ class APIS_CLASS {
     }
 
     /**
-     * 修改密码
+     * 找回密码
      * @param {*} telephone
      * @param {*} qrcode
      * @param {*} password
@@ -97,11 +99,35 @@ class APIS_CLASS {
     }
 
     /**
+     * 重置密码
+     * @param {*} password
+     */
+    password_update(password) {
+        let url = URLS.common_prefix + URLS.account_password_update;
+        let body = {
+            new_password: password,
+        }
+        return post(url, body);
+    }
+
+    /**
      * 获取用户资料
      */
     profile() {
         let url = URLS.common_prefix + URLS.account_profile;
         let body = {}
+        return post(url, body);
+    }
+
+
+    /**
+     * 更新用户资料
+     */
+    profile_update(name) {
+        let url = URLS.common_prefix + URLS.account_profile_update;
+        let body = {
+            new_name: name,
+        }
         return post(url, body);
     }
 
